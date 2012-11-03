@@ -1,0 +1,91 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-08-02T08:51:41+00:00\n"
+"Last-Translator: SedLex <http://www.sedlex.fr/>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: France\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables the display of a number of related posts in each post."
+msgstr ""
+
+msgid "Customize the apparence"
+msgstr ""
+
+msgid "HTML:"
+msgstr ""
+
+msgid "Please note that %s stands for a list of related posts. The default value of the HTML is:"
+msgstr ""
+
+msgid "CSS:"
+msgstr ""
+
+msgid "The default value of the CSS is:"
+msgstr ""
+
+msgid "The number of related posts to display in each post:"
+msgstr ""
+
+msgid "Advanced options"
+msgstr ""
+
+msgid "The number of words used to compare posts:"
+msgstr ""
+
+msgid "The weight of the content:"
+msgstr ""
+
+msgid "The weight of the title:"
+msgstr ""
+
+msgid "The weight of the categories:"
+msgstr ""
+
+msgid "The weight of the keywords:"
+msgstr ""
+
+msgid "In the following table, you will find some examples of related posts that may be displayed."
+msgstr ""
+
+msgid "Please note that the presented examples are randomly selected. Refresh the page to change the examples."
+msgstr ""
+
+msgid "Title of the post"
+msgstr ""
+
+msgid "Extracted words"
+msgstr ""
+
+msgid "Related posts"
+msgstr ""
+
+msgid "Examples"
+msgstr "Exemple"
+
+msgid "Parameters"
+msgstr "Paramètres"
+
+msgid "Manage translations"
+msgstr "Gérer les traductions"
+
+msgid "Give feedback"
+msgstr ""
+
+msgid "Other plugins"
+msgstr ""
+
