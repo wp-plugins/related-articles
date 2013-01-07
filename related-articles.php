@@ -2,7 +2,8 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>This plugin is under GPL licence</p>
-Version: 1.0.1
+Version: 1.0.2
+
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -51,7 +52,6 @@ class related_articles extends pluginSedLex {
 		// Be aware that the second argument should be of the form of array($this,"the_function")
 		// For instance add_action( "the_content",  array($this,"modify_content")) : this function will call the function 'modify_content' when the content of a post is displayed
 		
-		// add_action( "the_content",  array($this,"modify_content")) ; 
 		add_action('save_post', array($this,"post_has_been_saved"));
 		
 		// Important variables initialisation (Do not modify)
@@ -61,8 +61,39 @@ class related_articles extends pluginSedLex {
 		// activation and deactivation functions (Do not modify)
 		register_activation_hook(__FILE__, array($this,'install'));
 		register_deactivation_hook(__FILE__, array($this,'deactivate'));
-		register_uninstall_hook(__FILE__, array($this,'uninstall_removedata'));
+		register_uninstall_hook(__FILE__, array('related_articles','uninstall_removedata'));
 		
+	}
+	
+	/** ====================================================================================================================================================
+	* In order to uninstall the plugin, few things are to be done ... 
+	* (do not modify this function)
+	* 
+	* @return void
+	*/
+	
+	public function uninstall_removedata () {
+		global $wpdb ;
+		// DELETE OPTIONS
+		delete_option('related_articles'.'_options') ;
+		if (is_multisite()) {
+			delete_site_option('related_articles'.'_options') ;
+		}
+		
+		// DELETE SQL
+		if (function_exists('is_multisite') && is_multisite()){
+			$old_blog = $wpdb->blogid;
+			$old_prefix = $wpdb->prefix ; 
+			// Get all blog ids
+			$blogids = $wpdb->get_col($wpdb->prepare("SELECT blog_id FROM ".$wpdb->blogs));
+			foreach ($blogids as $blog_id) {
+				switch_to_blog($blog_id);
+				$wpdb->query("DROP TABLE ".str_replace($old_prefix, $wpdb->prefix, $wpdb->prefix . "pluginSL_" . 'related_articles')) ; 
+			}
+			switch_to_blog($old_blog);
+		} else {
+			$wpdb->query("DROP TABLE ".$wpdb->prefix . "pluginSL_" . 'related_articles' ) ; 
+		}
 	}
 
 	/**====================================================================================================================================================
@@ -411,9 +442,9 @@ class related_articles extends pluginSedLex {
 		$this->set_param('last_update_posts', date("Y-m-d H:i:s")) ; 
 		
 		//We check if there is already an entry
-		$query = "SELECT id_post FROM ".$this->table_name." WHERE id_post='$ID'"  ; 
-		if ($ID==$wpdb->get_var($query)) {
-			$query = "UPDATE ".$this->table_name." SET extracted_keywords='', signature_param='".$this->get_param_signature()."' WHERE id_post='$ID'"  ; 
+		$query = "SELECT id_post FROM ".$this->table_name." WHERE id_post='$post_id'"  ; 
+		if ($post_id==$wpdb->get_var($query)) {
+			$query = "UPDATE ".$this->table_name." SET extracted_keywords='', signature_param='".$this->get_param_signature()."' WHERE id_post='$post_id'"  ; 
 			$wpdb->query($query) ; 
 		} 
 	}
@@ -498,7 +529,11 @@ class related_articles extends pluginSedLex {
 			}
 			// We take only words longer than 2 characters (i.e. 3 and longer)
 			if ($size>2) {
-				$score[$word] += $occurrence/count($wordlist)*$size*$size*2*$this->get_param('ponderation_title') ; 
+				if (isset($score[$word])) {
+					$score[$word] += $occurrence/count($wordlist)*$size*$size*2*$this->get_param('ponderation_title') ; 
+				} else {			
+					$score[$word] = $occurrence/count($wordlist)*$size*$size*2*$this->get_param('ponderation_title') ; 
+				}
 			}
 		}
 		
@@ -509,9 +544,17 @@ class related_articles extends pluginSedLex {
 		if ($categories) {
 			foreach ($categories as $cat) {
 				if ( function_exists('mb_split') && !empty($charset) ) {
-					$score[mb_strtolower($cat->cat_name, $charset)] += 1/sqrt(count($categories))*35*$this->get_param('ponderation_category') ;	
+					if (isset($score[mb_strtolower($cat->cat_name, $charset)])) {
+						$score[mb_strtolower($cat->cat_name, $charset)] += 1/sqrt(count($categories))*35*$this->get_param('ponderation_category') ;	
+					} else {
+						$score[mb_strtolower($cat->cat_name, $charset)] = 1/sqrt(count($categories))*35*$this->get_param('ponderation_category') ;	
+					}
 				} else {
-					$score[strtolower($cat->cat_name)] += 1/sqrt(count($categories))*35*$this->get_param('ponderation_category');	
+					if (isset($score[strtolower($cat->cat_name)])) {
+						$score[strtolower($cat->cat_name)] += 1/sqrt(count($categories))*35*$this->get_param('ponderation_category');	
+					} else {
+						$score[strtolower($cat->cat_name)] = 1/sqrt(count($categories))*35*$this->get_param('ponderation_category');	
+					}
 				}
 			}
 		}
@@ -523,9 +566,17 @@ class related_articles extends pluginSedLex {
 		if ($posttags) {
 			foreach($posttags as $tag) {
 				if ( function_exists('mb_split') && !empty($charset) ) {
-					$score[mb_strtolower($tag->name, $charset)] += 1/sqrt(count($posttags))*20*$this->get_param('ponderation_keywords') ;	
+					if (isset($score[mb_strtolower($tag->name, $charset)])) {
+						$score[mb_strtolower($tag->name, $charset)] += 1/sqrt(count($posttags))*20*$this->get_param('ponderation_keywords') ;	
+					} else {
+						$score[mb_strtolower($tag->name, $charset)] = 1/sqrt(count($posttags))*20*$this->get_param('ponderation_keywords') ;	
+					}
 				} else {
-					$score[strtolower($tag->name)] += 1/sqrt(count($posttags))*20*$this->get_param('ponderation_keywords') ;	
+					if (isset($score[strtolower($tag->name)])) {
+						$score[strtolower($tag->name)] += 1/sqrt(count($posttags))*20*$this->get_param('ponderation_keywords') ;	
+					} else {
+						$score[strtolower($tag->name)] = 1/sqrt(count($posttags))*20*$this->get_param('ponderation_keywords') ;	
+					}
 				}
 			}	
 		}
@@ -556,7 +607,7 @@ class related_articles extends pluginSedLex {
 		global $wpdb ; 
 		$query = "SELECT extracted_keywords, signature_param FROM ".$this->table_name." WHERE id_post='$ID'"  ; 
 		$results = $wpdb->get_results($query) ; 
-		if (($results[0]->extracted_keywords!="")&&($results[0]->signature_param==$this->get_param_signature())) {
+		if ((isset($results[0]))&&($results[0]->extracted_keywords!="")&&($results[0]->signature_param==$this->get_param_signature())) {
 			return unserialize(stripslashes($results[0]->extracted_keywords)) ; 
 		} else {
 			// We compute the keywords
@@ -613,7 +664,9 @@ class related_articles extends pluginSedLex {
 	function compute_distance($keyword1, $keyword2) {
 		$val = 0 ; 
 		foreach ($keyword1 as $w => $n){
-			$val += sqrt($n*$keyword2[$w]) ; 
+			if (isset($keyword2[$w])) {
+				$val += sqrt($n*$keyword2[$w]) ; 
+			}
 		}
 		return floor(100*$val)/100 ; 
 	}
