@@ -773,6 +773,7 @@ if (!class_exists("svnAdmin")) {
 		*/
 		
 		function asc2bin ($ascii) {
+			$binary = "" ; 
 			while ( strlen($ascii) > 0 ){
 				$byte = "";
 				$i = 0;
@@ -846,10 +847,8 @@ if (!class_exists("svnAdmin")) {
 					$randDisplay = rand(0,100000) ; 
 					echo "jQuery('#innerPopupForm').animate({scrollTop: jQuery('#innerPopupForm')[0].scrollHeight}, 10);\r\n" ; 
 					
-					echo "var maxFile=20 ; 
-					
-					function displayTheDiff".$randDisplay."(max) { 
-						max = typeof max !== 'undefined' ? max : maxFile;
+					echo "function displayTheDiff".$randDisplay."(max) { 
+						max = typeof max !== 'undefined' ? max : 41;
 						var arguments = {
 							action: 'svn_compare', 
 							maxFiles: max, 
@@ -861,14 +860,18 @@ if (!class_exists("svnAdmin")) {
 							if (x.status==0){
 								//Offline
 							} else if (x.status==500){
-								jQuery(\"#innerPopupForm\").html(\"Error 500: The ajax request is retried (nbFile:\"+max+\")\");
-								displayTheDiff".$randDisplay."(max-1) ;
+								if (max-8>0) {
+									jQuery(\"#innerPopupForm\").html(\"Error 500: The ajax request is retried (nbFile:\"+max+\")\");
+									displayTheDiff".$randDisplay."(max-8) ;
+								} else {
+									jQuery(\"#innerPopupForm\").html(\"Error 500: The ajax request is *NOT* retried (nbFile:\"+max+\")\");
+								}
 							} else {
 								jQuery(\"#innerPopupForm\").html(\"Error \"+x.status+\": No data retrieved\");
 							}
 						});
 					}
-					window.setTimeout( 'displayTheDiff".$randDisplay."' , 1000);\r\n" ; 
+					displayTheDiff".$randDisplay."(41) ; \r\n" ; 
 					echo "</script>\n" ; 	
 				} else {
 					echo __('An error occurred during the retrieval of files on the server ! Sorry ...', 'SL_framework')."<br/>\n" ; 
@@ -909,7 +912,7 @@ if (!class_exists("svnAdmin")) {
 				echo "<h3>".__('Local to SVN repository', 'SL_framework')."</h3>" ; 
 				echo "<p>".sprintf(__('Comparing %s with %s', 'SL_framework'), "<em>".WP_PLUGIN_DIR."/".$plugin."/</em>", "<em>".$local_cache."/".$plugin."/"."</em>")."</p>" ; 
 				
-				$folddiff = new foldDiff() ; 
+				$folddiff = new foldDiff($max) ; 
 				$result = $folddiff->diff(WP_PLUGIN_DIR."/".$plugin, $local_cache."/".$plugin) ; 
 				$random = $folddiff->render(true, true, true) ; 
 				
@@ -931,7 +934,7 @@ if (!class_exists("svnAdmin")) {
 				echo "<h3>".__('SVN repository to Local', 'SL_framework')."</h3>" ; 
 				echo "<p>".sprintf(__('Comparing %s with %s', 'SL_framework'), "<em>".$local_cache."/".$plugin."/"."</em>", "<em>".WP_PLUGIN_DIR."/".$plugin."/</em>")."</p>" ; 
 				
-				$folddiff = new foldDiff() ; 
+				$folddiff = new foldDiff($max) ; 
 				$result = $folddiff->diff($local_cache."/".$plugin, WP_PLUGIN_DIR."/".$plugin) ; 
 				$random = $folddiff->render(true, true, true) ; 
 				

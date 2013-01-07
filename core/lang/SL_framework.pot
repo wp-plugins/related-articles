@@ -217,7 +217,7 @@ msgstr ""
 
 #: core.class.php:1088
 #: core.class.php:1657
-#: core/svn.class.php:885
+#: core/svn.class.php:888
 #@ SL_framework
 msgid "Getting SVN information..."
 msgstr ""
@@ -605,96 +605,96 @@ msgstr ""
 msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
 msgstr ""
 
-#: core/svn.class.php:803
+#: core/svn.class.php:804
 #@ SL_framework
 msgid "SVN client for %s"
 msgstr ""
 
-#: core/svn.class.php:822
+#: core/svn.class.php:823
 #@ SL_framework
 msgid "Updating the local cache"
 msgstr ""
 
-#: core/svn.class.php:830
+#: core/svn.class.php:831
 #@ SL_framework
 msgid "folder created"
 msgstr ""
 
-#: core/svn.class.php:832
+#: core/svn.class.php:833
 #@ SL_framework
 msgid "folder creation has failed !"
 msgstr ""
 
-#: core/svn.class.php:836
+#: core/svn.class.php:837
 #@ SL_framework
 msgid "%s bytes transfered"
 msgstr ""
 
-#: core/svn.class.php:874
+#: core/svn.class.php:877
 #@ SL_framework
 msgid "An error occurred during the retrieval of files on the server ! Sorry ..."
 msgstr ""
 
-#: core/svn.class.php:909
-#: core/svn.class.php:929
+#: core/svn.class.php:912
+#: core/svn.class.php:932
 #@ SL_framework
 msgid "Local to SVN repository"
 msgstr ""
 
-#: core/svn.class.php:910
-#: core/svn.class.php:932
+#: core/svn.class.php:913
+#: core/svn.class.php:935
 #@ SL_framework
 msgid "Comparing %s with %s"
 msgstr ""
 
-#: core/svn.class.php:918
-#: core/svn.class.php:940
+#: core/svn.class.php:921
+#: core/svn.class.php:943
 #@ SL_framework
 msgid "Confirmation"
 msgstr ""
 
-#: core/svn.class.php:920
+#: core/svn.class.php:923
 #@ SL_framework
 msgid "Commit comment:"
 msgstr ""
 
-#: core/svn.class.php:922
+#: core/svn.class.php:925
 #@ SL_framework
 msgid "Yes, the SVN version will be deleted and be replaced by the local version"
 msgstr ""
 
-#: core/svn.class.php:931
-#: core/svn.class.php:949
+#: core/svn.class.php:934
+#: core/svn.class.php:952
 #@ SL_framework
 msgid "SVN repository to Local"
 msgstr ""
 
-#: core/svn.class.php:942
+#: core/svn.class.php:945
 #@ SL_framework
 msgid "Yes, the local version will be overwritten with the repository files"
 msgstr ""
 
-#: core/svn.class.php:973
+#: core/svn.class.php:976
 #@ SL_framework
 msgid "Sending to the repository in progress..."
 msgstr ""
 
-#: core/svn.class.php:1280
+#: core/svn.class.php:1283
 #@ SL_framework
 msgid "The commit has ended [ %s ]... You should received an email quickly ! You may close the window or wait for the automatic closing."
 msgstr ""
 
-#: core/svn.class.php:1286
+#: core/svn.class.php:1289
 #@ SL_framework
 msgid "The commit has ended but there is an error!"
 msgstr ""
 
-#: core/svn.class.php:1306
+#: core/svn.class.php:1309
 #@ SL_framework
 msgid "Sending to the local files in progress..."
 msgstr ""
 
-#: core/svn.class.php:1369
+#: core/svn.class.php:1372
 #@ SL_framework
 msgid "The rollback has ended ..."
 msgstr ""
