@@ -725,7 +725,7 @@ class related_articles extends pluginSedLex {
 		$query = "SELECT related_posts, signature_param, date_maj FROM ".$this->table_name." WHERE id_post='$ID'"  ; 
 		$results = $wpdb->get_results($query) ; 
 		
-		if (($results[0]->related_posts!="") && ($results[0]->signature_param==$this->get_param_signature()) && (strtotime($results[0]->date_maj)-strtotime($this->get_param('last_update_posts'))>0)) {
+		if ((count($results)>0) && ($results[0]->related_posts!="") && ($results[0]->signature_param==$this->get_param_signature()) && (strtotime($results[0]->date_maj)-strtotime($this->get_param('last_update_posts'))>0)) {
 			$previous_results = unserialize(stripslashes($results[0]->related_posts)) ; 
 			// We compute the new posts but with fewer articles
 			$related_posts = $this->similar_posts($ID, $max, $previous_results) ; 
