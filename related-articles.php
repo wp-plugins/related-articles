@@ -2,7 +2,7 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>This plugin is under GPL licence</p>
-Version: 1.0.3
+Version: 1.0.4
 
 Framework: SL_Framework
 Author: SedLex

@@ -58,8 +58,11 @@ Have fun !
 
 == Changelog ==
 
+= 1.0.4 = 
+* Lighten the plugin and add translations
+
 = 1.0.2 = 
-*Update the core
+* Update the core
 
 = 1.0.1 = 
 * First release
@@ -67,4 +70,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:5d0e91771f88742d9d29613a04e7472e
+InfoVersion:e5334579b96dc97bff130e2f4adf628a
