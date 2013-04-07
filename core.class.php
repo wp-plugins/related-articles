@@ -865,10 +865,11 @@ if (!class_exists('pluginSedLex')) {
 							$out .= $content ; 
 						} else if (strpos($file,'/core/css')===false) {
 							list($plugin, $void) = explode('/', str_replace(WP_PLUGIN_DIR."/", "", $file), 2) ; 
-							$out .= str_replace( '../img/', '../../'.$plugin.'/img/', $content );
+							$content = str_replace( '../core/img/', plugins_url()."/".$plugin.'/core/img/', $content );
+							$out .= str_replace( '../img/', plugins_url()."/".$plugin.'/img/', $content );
 						} else {
 							list($plugin, $void) = explode('/', str_replace(WP_PLUGIN_DIR."/", "", $file), 2) ; 
-							$out .= str_replace( '../img/', '../../'.$plugin.'/core/img/', $content );			
+							$out .= str_replace( '../img/', plugins_url()."/".$plugin.'/core/img/', $content );			
 						}
 					} else {
 						$out .=  "\n/*====================================================*/\n";
@@ -1021,7 +1022,7 @@ if (!class_exists('pluginSedLex')) {
 					$sl_count ++ ; 
 				}
 ?>
-				<p><?php printf(__("For now, you have installed %d  plugins including %d plugins developped with the SedLex's framework",'SL_framework'), $all_nb, $sl_count-1)?><p/>
+				<p><?php printf(__("For now, you have installed %s plugins including %s plugins developped with the SedLex's framework",'SL_framework'), $all_nb, $sl_count-1)?><p/>
 				<p><?php printf(__("The core plugin is located at %s",'SL_framework'), "<code>".str_replace(ABSPATH, "", SL_FRAMEWORK_DIR)."</code>")?><p/>
 <?php
 				

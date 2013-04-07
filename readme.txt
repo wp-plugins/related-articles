@@ -17,6 +17,8 @@ Returns a list of related entries to display into your posts/pages/etc.
 
 You may configure the apparence, the weights, etc.
 
+It is also possible to display featured images or first images in articles. 
+
 This plugin is under GPL licence
 
 = Multisite - Wordpress MU =
@@ -44,7 +46,7 @@ Have fun !
 
 == Installation ==
 
-1. Upload this folder to your plugin directory (for instance '/wp-content/plugins/')
+1. Upload this folder related-articles to your plugin directory (for instance '/wp-content/plugins/')
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Navigate to the 'SL plugins' box
 4. All plugins developed with the SL core will be listed in this box
@@ -58,16 +60,15 @@ Have fun !
 
 == Changelog ==
 
-= 1.0.4 = 
+= 1.1.0 = 
+* Related Articles may be displayed with their featured image or with their first image if it exists
+
+= 1.0.1 -&gt; 1.0.4 = 
 * Lighten the plugin and add translations
-
-= 1.0.2 = 
 * Update the core
-
-= 1.0.1 = 
 * First release
 
 == Frequently Asked Questions ==
 
  
-InfoVersion:ad801d0b78a88b8c91c1f7603e4c0fd2
+InfoVersion:fec3787360e75aebc67b742294bb5419

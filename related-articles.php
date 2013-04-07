@@ -1,9 +1,8 @@
 <?php
 /**
 Plugin Name: Related Articles
-Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>This plugin is under GPL licence</p>
-Version: 1.0.4
-
+Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
+Version: 1.1.0
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -232,7 +231,6 @@ class related_articles extends pluginSedLex {
 
 			case 'css' 		: return "*.related_posts {
    background-color:#EEEEEE ; 
-   font-size:11px ;
    margin:10px;
    padding : 10px;
 }
@@ -242,16 +240,40 @@ class related_articles extends pluginSedLex {
    font-weight:bold;
 }
 .related_post {
+   font-size:11px ;
+   font-style:normal ; 
+}
+.related_post_fi {
+   font-size:11px ;
+   font-style:normal ; 
+   text-align:center ; 
+}
+.related_post_featured_image {
+   border: 1px solid #999999;
+   float:left ; 
+   width:120px;
+   height:160px;
+   margin:5px;
+   padding:5px;
+   overflow:hidden;
+}
+.related_post_featured_image_img {
+   width:116px;
+   height:116px;
+   margin:2px;
+   padding:0px;
 }"		; break ; 
 			case 'html' 		: return "*<div class='related_posts'>
 <p class='related_posts_title'>You may also like ...</p>
-     %related_posts%
+     %related_posts_with_featured_image%
 </div>"			; break ; 
 			
 			case 'ponderation_content' 		: return 1				; break ; 
 			case 'ponderation_title' 		: return 1				; break ; 
 			case 'ponderation_category' 		: return 1				; break ; 
 			case 'ponderation_keywords' 		: return 1				; break ; 
+
+			case 'show_number' 		: return false				; break ; 
 
 			case 'type_list' 		: return "post,page"				; break ; 
 			case 'display_in' 		: return "post"				; break ; 
@@ -295,6 +317,9 @@ class related_articles extends pluginSedLex {
 				$params->add_title(__("Customize the apparence", $this->pluginID)) ; 
 				$params->add_param('html', __("HTML:", $this->pluginID)) ; 
 				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts. The default value of the HTML is:", $this->pluginID), "<code>%related_posts%</code>")) ; 
+				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts with their featured images or their first images.", $this->pluginID), "<code>%related_posts_with_featured_image%</code>")) ; 
+				$params->add_comment(__("The default value of the HTML is:", $this->pluginID)) ; 
+				
 				$params->add_comment_default_value('html') ; 
 				$params->add_param('css', __("CSS:", $this->pluginID)) ; 
 				$params->add_comment(__("The default value of the CSS is:", $this->pluginID)) ; 
@@ -306,6 +331,7 @@ class related_articles extends pluginSedLex {
 				$params->add_param('display_in_excerpt', __("Display in excerpt:", $this->pluginID)) ; 
 				
 				$params->add_title(__("Advanced options", $this->pluginID)) ; 
+				$params->add_param('show_number', __("Show the score in articles and for the logged users:", $this->pluginID)) ; 
 				$params->add_param('type_list', __("What are the different types of posts you want to look for:", $this->pluginID)) ; 
 				$params->add_comment(__("It is a coma separated list. The default value is:", $this->pluginID)) ; 
 				$params->add_comment_default_value('type_list') ; 
@@ -787,16 +813,44 @@ class related_articles extends pluginSedLex {
 		
 		$related_posts = $this->similar_posts_fromcache($id, $this->get_param('nb_similar_posts')) ; 
 		$cp = "" ; 
+		$cp_fi = "" ; 
 		foreach ($related_posts as $pi=>$n) {
+		
+			// Normal posts
+			// ---------------------
 			$cp .= "<p class='related_post'>" ; 
 			$cp .= "<a href='".get_permalink($pi)."'>".get_the_title($pi)."</a>" ; 
-			if (is_user_logged_in()) {
+			if ((is_user_logged_in())&&($this->get_param('show_number'))) {
 				$cp .= " ($n)" ; 
 			} 
 			$cp .= "</p>" ; 
+			
+			// with featured image
+			// ---------------------
+			$cp_fi .= "<div class='related_post_featured_image'>" ; 
+			$cp_fi .= "<div class='related_post_featured_image_img'>" ; 
+			if (has_post_thumbnail($pi)) {
+				$cp_fi .=  get_the_post_thumbnail( $pi, array(116,116)) ; 
+			} else {
+				$files = get_children("post_parent=$pi&post_type=attachment&post_mime_type=image");
+			  	if($files) {
+					$keys = array_reverse(array_keys($files));
+					$num = $keys[0];
+					$cp_fi .=  wp_get_attachment_image($num, array(116,116));
+			  	}
+			}
+			$cp_fi .= "</div>" ; 			
+			$cp_fi .= "<p class='related_post_fi'>" ; 
+			$cp_fi .= "<a href='".get_permalink($pi)."'>".get_the_title($pi)."</a>" ; 
+			if ((is_user_logged_in())&&($this->get_param('show_number'))) {
+				$cp_fi .= " ($n)" ; 
+			} 
+			$cp_fi .= "</p>" ; 
+			$cp_fi .= "</div>" ; 
 		}
+		$cp_fi .= "<div style='clear:both;'></div>" ;
 		
-		return str_replace("%related_posts%", $cp, $content) ; 
+		return str_replace("%related_posts_with_featured_image%", $cp_fi, str_replace("%related_posts%", $cp, $content)) ; 
 	}
 }
 
