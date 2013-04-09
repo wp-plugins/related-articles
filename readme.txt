@@ -60,6 +60,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.1 = 
+* The images may be sized
+
 = 1.1.0 = 
 * Related Articles may be displayed with their featured image or with their first image if it exists
 
@@ -71,4 +74,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:fec3787360e75aebc67b742294bb5419
+InfoVersion:476ef643e1046b377151be6976d1919a

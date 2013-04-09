@@ -2,7 +2,7 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.0
+Version: 1.1.1
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -268,6 +268,9 @@ class related_articles extends pluginSedLex {
      %related_posts_with_featured_image%
 </div>"			; break ; 
 			
+			case 'width_thumb' 		: return 116				; break ; 
+			case 'height_thumb' 		: return 116				; break ; 
+
 			case 'ponderation_content' 		: return 1				; break ; 
 			case 'ponderation_title' 		: return 1				; break ; 
 			case 'ponderation_category' 		: return 1				; break ; 
@@ -319,8 +322,11 @@ class related_articles extends pluginSedLex {
 				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts. The default value of the HTML is:", $this->pluginID), "<code>%related_posts%</code>")) ; 
 				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts with their featured images or their first images.", $this->pluginID), "<code>%related_posts_with_featured_image%</code>")) ; 
 				$params->add_comment(__("The default value of the HTML is:", $this->pluginID)) ; 
-				
 				$params->add_comment_default_value('html') ; 
+				$params->add_param('width_thumb', __("Width of the thumbnail image if you choose to display the featured image (see above):", $this->pluginID)) ; 
+				$params->add_comment(__("The CSS might have to be modified (see below).", $this->pluginID)) ; 
+				$params->add_param('height_thumb', __("Height of the thumbnail image if you choose to display the featured image (see above):", $this->pluginID)) ; 
+				$params->add_comment(__("The CSS might have to be modified (see below).", $this->pluginID)) ; 
 				$params->add_param('css', __("CSS:", $this->pluginID)) ; 
 				$params->add_comment(__("The default value of the CSS is:", $this->pluginID)) ; 
 				$params->add_comment_default_value('css') ; 
@@ -830,13 +836,13 @@ class related_articles extends pluginSedLex {
 			$cp_fi .= "<div class='related_post_featured_image'>" ; 
 			$cp_fi .= "<div class='related_post_featured_image_img'>" ; 
 			if (has_post_thumbnail($pi)) {
-				$cp_fi .=  get_the_post_thumbnail( $pi, array(116,116)) ; 
+				$cp_fi .=  get_the_post_thumbnail( $pi, $this->get_param("height_thumb")."x".$this->get_param("width_thumb")) ; 
 			} else {
 				$files = get_children("post_parent=$pi&post_type=attachment&post_mime_type=image");
 			  	if($files) {
 					$keys = array_reverse(array_keys($files));
 					$num = $keys[0];
-					$cp_fi .=  wp_get_attachment_image($num, array(116,116));
+					$cp_fi .=  wp_get_attachment_image($num, $this->get_param("height_thumb")."x".$this->get_param("width_thumb"));
 			  	}
 			}
 			$cp_fi .= "</div>" ; 			
