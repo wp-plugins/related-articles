@@ -2,7 +2,8 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.1
+Version: 1.1.2
+
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -15,6 +16,8 @@ License: GPL3
 //Including the framework in order to make the plugin work
 
 require_once('core.php') ; 
+
+require ( ABSPATH . 'wp-admin/includes/image.php' );
 
 /** ====================================================================================================================================================
 * This class has to be extended from the pluginSedLex class which is defined in the framework
@@ -270,6 +273,7 @@ class related_articles extends pluginSedLex {
 			
 			case 'width_thumb' 		: return 116				; break ; 
 			case 'height_thumb' 		: return 116				; break ; 
+			case 'a_thumb' 		: return false				; break ; 
 
 			case 'ponderation_content' 		: return 1				; break ; 
 			case 'ponderation_title' 		: return 1				; break ; 
@@ -327,6 +331,7 @@ class related_articles extends pluginSedLex {
 				$params->add_comment(__("The CSS might have to be modified (see below).", $this->pluginID)) ; 
 				$params->add_param('height_thumb', __("Height of the thumbnail image if you choose to display the featured image (see above):", $this->pluginID)) ; 
 				$params->add_comment(__("The CSS might have to be modified (see below).", $this->pluginID)) ; 
+				$params->add_param('a_thumb', __("Make the featured images clickable:", $this->pluginID)) ; 
 				$params->add_param('css', __("CSS:", $this->pluginID)) ; 
 				$params->add_comment(__("The default value of the CSS is:", $this->pluginID)) ; 
 				$params->add_comment_default_value('css') ; 
@@ -833,18 +838,52 @@ class related_articles extends pluginSedLex {
 			
 			// with featured image
 			// ---------------------
+			add_image_size("related-articles-thumb", $this->get_param("width_thumb"), $this->get_param("height_thumb"), true);
 			$cp_fi .= "<div class='related_post_featured_image'>" ; 
-			$cp_fi .= "<div class='related_post_featured_image_img'>" ; 
+			$cp_fi .= "<div class='related_post_featured_image_img'>" ;
+			if ($this->get_param('a_thumb')) {
+				$cp_fi .= "<a href='".get_permalink($pi)."'>" ; 
+ 			}
 			if (has_post_thumbnail($pi)) {
-				$cp_fi .=  get_the_post_thumbnail( $pi, $this->get_param("height_thumb")."x".$this->get_param("width_thumb")) ; 
+				$id = get_post_thumbnail_id($pi) ; 
+				$image = wp_get_attachment_image_src($id, "related-articles-thumb");
+				if ($image){
+					list($width, $height) = getimagesize($image[0]);
+					if (($this->get_param("width_thumb") == $width) && ($this->get_param("height_thumb") == $height)){
+						$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
+					} else {
+						// We have to generate the thumbnail
+						$metadata = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
+						wp_update_attachment_metadata( $id, $metadata );
+						$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
+					}
+				} else {
+					$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
+				}				
 			} else {
 				$files = get_children("post_parent=$pi&post_type=attachment&post_mime_type=image");
 			  	if($files) {
 					$keys = array_reverse(array_keys($files));
-					$num = $keys[0];
-					$cp_fi .=  wp_get_attachment_image($num, $this->get_param("height_thumb")."x".$this->get_param("width_thumb"));
+					$id = $keys[0];
+					$image = wp_get_attachment_image_src($id, "related-articles-thumb");
+					if ($image){
+						list($width, $height) = getimagesize($image[0]);
+						if (($this->get_param("width_thumb") == $width) && ($this->get_param("height_thumb") == $height)){
+							$cp_fi .=   wp_get_attachment_image($id, "related-articles-thumb");
+						} else {
+							// We have to generate the thumbnail
+							$metadata = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
+							wp_update_attachment_metadata( $id, $metadata );
+							$cp_fi .=  wp_get_attachment_image($id, "related-articles-thumb");
+						}
+					} else {
+						$cp_fi .=  wp_get_attachment_image($id, "related-articles-thumb");
+					}				
 			  	}
 			}
+			if ($this->get_param('a_thumb')) {
+				$cp_fi .= "</a>" ; 
+ 			}
 			$cp_fi .= "</div>" ; 			
 			$cp_fi .= "<p class='related_post_fi'>" ; 
 			$cp_fi .= "<a href='".get_permalink($pi)."'>".get_the_title($pi)."</a>" ; 

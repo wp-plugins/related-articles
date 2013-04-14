@@ -60,6 +60,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.2 = 
+* The displayed image are not resize with css but also with real size
+
 = 1.1.1 = 
 * The images may be sized
 
@@ -74,4 +77,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:476ef643e1046b377151be6976d1919a
+InfoVersion:c0f6c4bad3d84b77093771cdd1d51c58
