@@ -2,7 +2,8 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.2
+Version: 1.1.3
+
 
 Framework: SL_Framework
 Author: SedLex
@@ -17,7 +18,7 @@ License: GPL3
 
 require_once('core.php') ; 
 
-require ( ABSPATH . 'wp-admin/includes/image.php' );
+require_once ( ABSPATH . 'wp-admin/includes/image.php' );
 
 /** ====================================================================================================================================================
 * This class has to be extended from the pluginSedLex class which is defined in the framework

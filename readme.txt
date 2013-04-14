@@ -60,6 +60,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.3 = 
+* Bug with require / require_once
+
 = 1.1.2 = 
 * The displayed image are not resize with css but also with real size
 
@@ -77,4 +80,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:c0f6c4bad3d84b77093771cdd1d51c58
+InfoVersion:07fab20b6f8eebeaec6ba8f4385f271e
