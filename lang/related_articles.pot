@@ -1,188 +1,188 @@
 Content-Transfer-Encoding: 8bit
 
-#: related-articles.php:314
+#: related-articles.php:315
 #@ related_articles
 msgid "This plugin enables the display of a number of related posts in each post."
 msgstr ""
 
-#: related-articles.php:324
+#: related-articles.php:325
 #@ related_articles
 msgid "Customize the apparence"
 msgstr ""
 
-#: related-articles.php:325
+#: related-articles.php:326
 #@ related_articles
 msgid "HTML:"
 msgstr ""
 
-#: related-articles.php:326
+#: related-articles.php:327
 #@ related_articles
 msgid "Please note that %s stands for a list of related posts. The default value of the HTML is:"
 msgstr ""
 
-#: related-articles.php:327
+#: related-articles.php:328
 #@ related_articles
 msgid "Please note that %s stands for a list of related posts with their featured images or their first images."
 msgstr ""
 
-#: related-articles.php:328
+#: related-articles.php:329
 #@ related_articles
 msgid "The default value of the HTML is:"
 msgstr ""
 
-#: related-articles.php:330
+#: related-articles.php:331
 #@ related_articles
 msgid "Width of the thumbnail image if you choose to display the featured image (see above):"
 msgstr ""
 
-#: related-articles.php:331
-#: related-articles.php:333
+#: related-articles.php:332
+#: related-articles.php:334
 #@ related_articles
 msgid "The CSS might have to be modified (see below)."
 msgstr ""
 
-#: related-articles.php:332
+#: related-articles.php:333
 #@ related_articles
 msgid "Height of the thumbnail image if you choose to display the featured image (see above):"
 msgstr ""
 
-#: related-articles.php:334
+#: related-articles.php:335
 #@ related_articles
 msgid "Make the featured images clickable:"
 msgstr ""
 
-#: related-articles.php:335
+#: related-articles.php:336
 #@ related_articles
 msgid "CSS:"
 msgstr ""
 
-#: related-articles.php:336
+#: related-articles.php:337
 #@ related_articles
 msgid "The default value of the CSS is:"
 msgstr ""
 
-#: related-articles.php:338
+#: related-articles.php:339
 #@ related_articles
 msgid "The number of related posts to display in each post:"
 msgstr ""
 
-#: related-articles.php:339
+#: related-articles.php:340
 #@ related_articles
 msgid "The list of type of posts where the related posts are displayed:"
 msgstr ""
 
-#: related-articles.php:340
-#: related-articles.php:347
+#: related-articles.php:341
+#: related-articles.php:348
 #@ related_articles
 msgid "It is a coma separated list. The default value is:"
 msgstr ""
 
-#: related-articles.php:342
+#: related-articles.php:343
 #@ related_articles
 msgid "Display in excerpt:"
 msgstr ""
 
-#: related-articles.php:344
+#: related-articles.php:345
 #@ related_articles
 msgid "Advanced options"
 msgstr ""
 
-#: related-articles.php:345
+#: related-articles.php:346
 #@ related_articles
 msgid "Show the score in articles and for the logged users:"
 msgstr ""
 
-#: related-articles.php:346
+#: related-articles.php:347
 #@ related_articles
 msgid "What are the different types of posts you want to look for:"
 msgstr ""
 
-#: related-articles.php:349
+#: related-articles.php:350
 #@ related_articles
 msgid "The number of words used to compare posts:"
 msgstr ""
 
-#: related-articles.php:350
+#: related-articles.php:351
 #@ related_articles
 msgid "The weight of the content:"
 msgstr ""
 
-#: related-articles.php:351
+#: related-articles.php:352
 #@ related_articles
 msgid "The weight of the title:"
 msgstr ""
 
-#: related-articles.php:352
+#: related-articles.php:353
 #@ related_articles
 msgid "The weight of the categories:"
 msgstr ""
 
-#: related-articles.php:353
+#: related-articles.php:354
 #@ related_articles
 msgid "The weight of the keywords:"
 msgstr ""
 
-#: related-articles.php:375
+#: related-articles.php:376
 #@ related_articles
 msgid "For now, your have %s published articles (i.e. %s)."
 msgstr ""
 
-#: related-articles.php:376
+#: related-articles.php:377
 #@ related_articles
 msgid "%s articles have their keywords cached."
 msgstr ""
 
-#: related-articles.php:377
+#: related-articles.php:378
 #@ related_articles
 msgid "%s articles have similar posts cached."
 msgstr ""
 
-#: related-articles.php:380
+#: related-articles.php:381
 #@ related_articles
 msgid "In the following table, you will find some examples of related posts that may be displayed."
 msgstr ""
 
-#: related-articles.php:381
+#: related-articles.php:382
 #@ related_articles
 msgid "Please note that the presented examples are randomly selected. Refresh the page to change the examples."
 msgstr ""
 
-#: related-articles.php:384
+#: related-articles.php:385
 #@ related_articles
 msgid "Title of the post"
 msgstr ""
 
-#: related-articles.php:384
+#: related-articles.php:385
 #@ related_articles
 msgid "Extracted words"
 msgstr ""
 
-#: related-articles.php:384
+#: related-articles.php:385
 #@ related_articles
 msgid "Related posts"
 msgstr ""
 
-#: related-articles.php:421
+#: related-articles.php:422
 #@ related_articles
 msgid "Examples"
 msgstr ""
 
-#: related-articles.php:424
+#: related-articles.php:425
 #@ related_articles
 msgid "Parameters"
 msgstr ""
 
-#: related-articles.php:432
+#: related-articles.php:433
 #@ related_articles
 msgid "Manage translations"
 msgstr ""
 
-#: related-articles.php:439
+#: related-articles.php:440
 #@ related_articles
 msgid "Give feedback"
 msgstr ""
 
-#: related-articles.php:447
+#: related-articles.php:448
 #@ related_articles
 msgid "Other plugins"
 msgstr ""

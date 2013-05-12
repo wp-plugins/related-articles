@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-05-11T09:00:00+00:00\n"
+"Last-Translator: cervellomacchiato <cervellomacchiato.it>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: Italy\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables the display of a number of related posts in each post."
+msgstr "Questo plugin permette di visualizzare un certo numero di articoli correlati in ciascun articolo"
+
+msgid "Customize the apparence"
+msgstr "Personalizza l&#039;aspetto"
+
+msgid "HTML:"
+msgstr "HTML:"
+
+msgid "Please note that %s stands for a list of related posts. The default value of the HTML is:"
+msgstr "Nota che %s significa una lista di articoli correlati. Il valore di default dell&#039;HTML è:"
+
+msgid "Please note that %s stands for a list of related posts with their featured images or their first images."
+msgstr "Nota che %s significa una lista di articoli correlati con la loro immagine predefinita o la loro prima immagine."
+
+msgid "The default value of the HTML is:"
+msgstr "Il valore di default dell&#039;HTML è:"
+
+msgid "Title of the post"
+msgstr "Titolo dell&#039;articolo"
+
+msgid "Extracted words"
+msgstr "Parole estratte"
+
+msgid "Related posts"
+msgstr "Articoli consigliati"
+
+msgid "Examples"
+msgstr "Esempi"
+
+msgid "Parameters"
+msgstr "Parametri"
+
+msgid "Manage translations"
+msgstr "Gestisci traduzioni"
+
+msgid "Give feedback"
+msgstr "Lascia un feedback"
+
+msgid "Other plugins"
+msgstr "Altri plugin"
+

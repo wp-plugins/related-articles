@@ -2,7 +2,8 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.3
+Version: 1.1.4
+
 
 
 Framework: SL_Framework
@@ -66,6 +67,18 @@ class related_articles extends pluginSedLex {
 		register_deactivation_hook(__FILE__, array($this,'deactivate'));
 		register_uninstall_hook(__FILE__, array('related_articles','uninstall_removedata'));
 		
+		add_action( 'widgets_init', array($this, '_load_widget')) ;		
+	}
+	
+	/** ====================================================================================================================================================
+	* In order to uninstall the plugin, few things are to be done ... 
+	* (do not modify this function)
+	* 
+	* @return void
+	*/
+	
+	public function _load_widget () {
+		register_widget( 'related_articles_Widget' );
 	}
 	
 	/** ====================================================================================================================================================
@@ -901,5 +914,50 @@ class related_articles extends pluginSedLex {
 }
 
 $related_articles = related_articles::getInstance();
+
+// Widget
+//=================
+
+class related_articles_Widget extends WP_Widget {
+	
+	// widget actual processes
+	//-----------------------------
+	function related_articles_Widget() {
+        $this->WP_Widget('related_articles_Widget', 'Related Articles', array('classname' => 'related_articles_Widget', 'description' => 'Display related articles in a widget' ));
+    }
+	
+	// outputs the content of the widget
+	//-----------------------------
+	public function widget( $args, $instance ) {
+		global $post ; 
+		extract( $args );
+		$title = apply_filters( 'widget_title', $instance['title'] );
+		echo '<h3 class="widget-title">'.$title."</h3>" ; 
+		echo "<p>&nbsp;</p>" ; 
+		$instance_plugin = call_user_func(array('related_articles', 'getInstance'));  ; 
+					
+		echo $instance_plugin->display_related($post->ID);
+	}
+	
+	// outputs the options form on admin
+	//-----------------------------
+ 	public function form($instance) {
+        $instance = wp_parse_args( (array) $instance, array( 'title' => 'Related Articles') );
+        $title = strip_tags($instance['title']);
+		?>
+            <p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></label></p>
+		<?php	
+	}
+	
+	// processes widget options to be saved
+	//-----------------------------
+	public function update( $new_instance, $old_instance ) {
+      	$instance = $old_instance;
+        $instance['title'] = strip_tags($new_instance['title']); 
+        return $instance;
+	}
+
+}
+
 
 ?>

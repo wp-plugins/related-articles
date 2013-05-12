@@ -189,9 +189,17 @@ if (!class_exists("translationSL")) {
 				$table->title (array(__('Sentence to translate','SL_framework'), __('Translation','SL_framework'))) ; 
 				$table->removeFooter() ;
 				if ($isFramework!='false') {
-					$content_pot = file(WP_PLUGIN_DIR."/".$isFramework."/core/lang/SL_framework.pot") ;
+					if (is_file(WP_PLUGIN_DIR."/".$isFramework."/core/lang/SL_framework.pot")) {
+						$content_pot = file(WP_PLUGIN_DIR."/".$isFramework."/core/lang/SL_framework.pot") ;
+					} else {
+						$content_pot = array() ; 
+					}
 				} else {
-					$content_pot = file(WP_PLUGIN_DIR."/".$plugin."/lang/".$domain .".pot") ;
+					if (is_file(WP_PLUGIN_DIR."/".$plugin."/lang/".$domain .".pot")) {
+						$content_pot = file(WP_PLUGIN_DIR."/".$plugin."/lang/".$domain .".pot") ;
+					} else {
+						$content_pot = array() ; 
+					}
 				}
 				$i=0 ; 
 				foreach ($content_pot as $ligne) {
@@ -686,9 +694,17 @@ if (!class_exists("translationSL")) {
 			$content .= "\"X-Textdomain-Support: yes\\n\"\n\n" ; 
 			fwrite($handle, $content);
 			if ($isFramework!='false') {
-				$content_pot = file(WP_PLUGIN_DIR."/".$isFramework."/core/lang/SL_framework.pot") ;
+				if (is_file(WP_PLUGIN_DIR."/".$isFramework."/core/lang/SL_framework.pot")) {
+					$content_pot = file(WP_PLUGIN_DIR."/".$isFramework."/core/lang/SL_framework.pot") ;
+				} else {
+					$content_pot=array() ; 
+				}
 			} else {
-				$content_pot = file(WP_PLUGIN_DIR."/".$plugin."/lang/".$domain .".pot") ;
+				if (is_file(WP_PLUGIN_DIR."/".$plugin."/lang/".$domain .".pot")) {
+					$content_pot = file(WP_PLUGIN_DIR."/".$plugin."/lang/".$domain .".pot") ;
+				} else {
+					$content_pot=array() ; 
+				}
 			}
 			$i=0 ; 
 		
@@ -1024,7 +1040,11 @@ if (!class_exists("translationSL")) {
 				echo "<p>".sprintf(__("This plugin is available in %s languages.",'SL_framework'),$nb)."</p>" ; 
 				
 				// We count the number of sentences to be translated
-				$content_pot = file($path."/lang/".$domain.".pot") ;
+				if (is_file($path."/lang/".$domain.".pot")) {
+					$content_pot = file($path."/lang/".$domain.".pot") ;
+				} else {
+					$content_pot = array() ; 
+				}
 				$all_count_pot = 0 ; 
 				foreach ($content_pot as $ligne_pot) {
 					if (preg_match("/^msgid \\\"(.*)\\\"$/", trim($ligne_pot))) {

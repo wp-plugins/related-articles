@@ -30,6 +30,7 @@ This plugin works on a multisite installation of Wordpress
 * English (United States), default language
 * Spanish (Spain) translation provided by DaviddeUgarte
 * French (France) translation provided by SedLex
+* Italian (Italy) translation provided by cervellomacchiato
 
 = Features of the framework =
 
@@ -60,6 +61,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.4 = 
+* Add a widget
+
 = 1.1.3 = 
 * Bug with require / require_once
 
@@ -80,4 +84,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:07fab20b6f8eebeaec6ba8f4385f271e
+InfoVersion:b6c44536214f90ffa6aea7bdc03b1cdc
