@@ -61,6 +61,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.5 = 
+* Update the core
+
 = 1.1.4 = 
 * Add a widget
 
@@ -84,4 +87,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:b6c44536214f90ffa6aea7bdc03b1cdc
+InfoVersion:3f094c8e4b0b6f874eb77940a949a8c5
