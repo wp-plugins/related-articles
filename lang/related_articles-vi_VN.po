@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-11-30T17:03:34+00:00\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Vietnamese\n"
+"X-Poedit-Country: Viet Nam\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables the display of a number of related posts in each post."
+msgstr "Plugin này cho phép màn hình hiển thị của một số bài viết liên quan trong mỗi bài viết."
+
+msgid "Customize the apparence"
+msgstr "Tùy chỉnh apparence"
+
+msgid "HTML:"
+msgstr "HTML:"
+
+msgid "Please note that %s stands for a list of related posts. The default value of the HTML is:"
+msgstr "Xin lưu ý rằng %s là viết tắt của một danh sách các bài viết liên quan. Giá trị mặc ​​định của HTML là:"
+
+msgid "Please note that %s stands for a list of related posts with their featured images or their first images."
+msgstr "Xin lưu ý rằng %s là viết tắt của một danh sách các bài viết liên quan với hình ảnh đặc trưng của họ, hình ảnh đầu tiên của họ."
+
+msgid "The default value of the HTML is:"
+msgstr "Giá trị mặc ​​định của HTML là:"
+
+msgid "Width of the thumbnail image if you choose to display the featured image (see above):"
+msgstr "Chiều rộng của hình ảnh thu nhỏ nếu bạn chọn để hiển thị hình ảnh nổi bật (xem ở trên):"
+
+msgid "The CSS might have to be modified (see below)."
+msgstr "Các CSS có thể phải được sửa đổi (xem dưới đây)."
+
+msgid "Height of the thumbnail image if you choose to display the featured image (see above):"
+msgstr "Chiều cao của hình ảnh thu nhỏ nếu bạn chọn để hiển thị hình ảnh nổi bật (xem ở trên):"
+
+msgid "Make the featured images clickable:"
+msgstr "Làm cho hình ảnh tính năng có thể click:"
+
+msgid "CSS:"
+msgstr "CSS"
+
+msgid "The default value of the CSS is:"
+msgstr "Số lượng các bài viết liên quan đến hiển thị trong mỗi bài viết:"
+
+msgid "The number of related posts to display in each post:"
+msgstr "Số lượng các bài viết liên quan đến hiển thị trong mỗi bài viết:"
+
+msgid "The list of type of posts where the related posts are displayed:"
+msgstr "Danh sách các loại bài viết mà các bài viết liên quan được hiển thị"
+
+msgid "It is a coma separated list. The default value is:"
+msgstr "Đây là một danh sách phân cách hôn mê. Giá trị mặc ​​định là"
+
+msgid "Display in excerpt:"
+msgstr "hiển thị trong đoạn trích:"
+
+msgid "Advanced options"
+msgstr "tùy chọn nâng cao"
+
+msgid "Show the score in articles and for the logged users:"
+msgstr "Các số điểm trong bài báo và cho người sử dụng đăng nhập:"
+
+msgid "What are the different types of posts you want to look for:"
+msgstr "các loại khác nhau của bài viết mà bạn muốn tìm là gì:"
+
+msgid "The number of words used to compare posts:"
+msgstr "Các số từ được sử dụng để so sánh bài viết:"
+
+msgid "The weight of the content:"
+msgstr "Trọng lượng của các nội dung:"
+
+msgid "The weight of the title:"
+msgstr "Trọng lượng của tiêu đề:"
+
+msgid "The weight of the categories:"
+msgstr "Trọng lượng của các loại:"
+
+msgid "The weight of the keywords:"
+msgstr "Trọng lượng của các từ khóa:"
+
+msgid "For now, your have %s published articles (i.e. %s)."
+msgstr "Hiện tại, bạn có những bài viết xuất bản %s (tức là %s)."
+
+msgid "%s articles have their keywords cached."
+msgstr "%s bài viết có từ khóa của họ được lưu trữ."
+
+msgid "%s articles have similar posts cached."
+msgstr "%s bài báo có bài viết tương tự được lưu trữ."
+
+msgid "In the following table, you will find some examples of related posts that may be displayed."
+msgstr "Trong bảng dưới đây, bạn sẽ tìm thấy một số ví dụ về các bài viết liên quan có thể được hiển thị."
+
+msgid "Please note that the presented examples are randomly selected. Refresh the page to change the examples."
+msgstr "Xin lưu ý rằng các ví dụ được trình bày được lựa chọn ngẫu nhiên. Làm mới trang để thay đổi các ví dụ."
+
+msgid "Title of the post"
+msgstr "Tiêu đề của bài"
+
+msgid "Extracted words"
+msgstr "Trích từ"
+
+msgid "Related posts"
+msgstr "Bài viết liên quan"
+
+msgid "Examples"
+msgstr "Ví dụ"
+
+msgid "Parameters"
+msgstr "Các thông số"
+
+msgid "Manage translations"
+msgstr ""
+
+msgid "Give feedback"
+msgstr "Cho ý kiến phản hồi"
+
+msgid "Other plugins"
+msgstr "Bổ sung khác"
+

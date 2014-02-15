@@ -4,8 +4,9 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-08-02T08:51:41+00:00\n"
+"PO-Revision-Date: 2013-11-30T16:09:48+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
+"Last-Translator: PigeotCarl <http://www.frichtiweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,60 +21,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-msgid "This plugin enables the display of a number of related posts in each post."
-msgstr ""
-
-msgid "Customize the apparence"
-msgstr ""
-
-msgid "HTML:"
-msgstr ""
-
-msgid "Please note that %s stands for a list of related posts. The default value of the HTML is:"
-msgstr ""
-
-msgid "CSS:"
-msgstr ""
-
-msgid "The default value of the CSS is:"
-msgstr ""
-
-msgid "The number of related posts to display in each post:"
-msgstr ""
-
-msgid "Advanced options"
-msgstr ""
-
-msgid "The number of words used to compare posts:"
-msgstr ""
-
-msgid "The weight of the content:"
-msgstr ""
-
-msgid "The weight of the title:"
-msgstr ""
-
-msgid "The weight of the categories:"
-msgstr ""
-
-msgid "The weight of the keywords:"
-msgstr ""
-
-msgid "In the following table, you will find some examples of related posts that may be displayed."
-msgstr ""
-
-msgid "Please note that the presented examples are randomly selected. Refresh the page to change the examples."
-msgstr ""
-
-msgid "Title of the post"
-msgstr ""
-
-msgid "Extracted words"
-msgstr ""
-
-msgid "Related posts"
-msgstr ""
-
 msgid "Examples"
 msgstr "Exemple"
 
@@ -83,9 +30,51 @@ msgstr "Paramètres"
 msgid "Manage translations"
 msgstr "Gérer les traductions"
 
+msgid "Customize the apparence"
+msgstr "Customiser l&#039;apparence"
+
+msgid "HTML:"
+msgstr "HTML :"
+
+msgid "The default value of the HTML is:"
+msgstr "La valeur HTML par défaut est :"
+
+msgid "CSS:"
+msgstr "CSS :"
+
+msgid "The default value of the CSS is:"
+msgstr "La valeur CSS par défaut est :"
+
+msgid "Advanced options"
+msgstr "Options avancées"
+
+msgid "The number of words used to compare posts:"
+msgstr "Nombre de mots utilisés pour comparer les posts"
+
+msgid "The weight of the content:"
+msgstr "Poids du contenu"
+
+msgid "The weight of the title:"
+msgstr "Poids du titre"
+
+msgid "The weight of the categories:"
+msgstr "Poids des catégories"
+
+msgid "The weight of the keywords:"
+msgstr "Poids des mots-clés"
+
+msgid "Title of the post"
+msgstr "Nom du post"
+
+msgid "Extracted words"
+msgstr "Mots extraits"
+
+msgid "Related posts"
+msgstr "Posts relatifs"
+
 msgid "Give feedback"
-msgstr ""
+msgstr "Envoyer un commentaire"
 
 msgid "Other plugins"
-msgstr ""
+msgstr "Autres plugins"
 

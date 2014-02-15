@@ -3,10 +3,10 @@
 Author: SedLex
 Contributors: SedLex
 Author URI: http://www.sedlex.fr/
-Plugin URI: http://wordpress.org/extend/plugins/related-articles/
+Plugin URI: http://wordpress.org/plugins/related-articles/
 Tags: 
 Requires at least: 3.0
-Tested up to: 3.5
+Tested up to: 3.8.1
 Stable tag: trunk
 
 Returns a list of related entries to display into your posts/pages/etc.
@@ -29,8 +29,10 @@ This plugin works on a multisite installation of Wordpress
 
 * English (United States), default language
 * Spanish (Spain) translation provided by DaviddeUgarte
-* French (France) translation provided by SedLex
+* French (France) translation provided by SedLex, PigeotCarl
 * Italian (Italy) translation provided by cervellomacchiato
+* Russian (Russia) translation provided by 
+* Vietnamese (Viet Nam) translation provided by 
 
 = Features of the framework =
 
@@ -61,6 +63,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.6 = 
+* Various little improvements
+
 = 1.1.5 = 
 * Update the core
 
@@ -87,4 +92,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:3f094c8e4b0b6f874eb77940a949a8c5
+InfoVersion:acf7480ef0774bb036f63709e55b4fc6

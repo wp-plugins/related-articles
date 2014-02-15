@@ -2,7 +2,8 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.5
+Version: 1.1.6
+
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -432,7 +433,7 @@ class related_articles extends pluginSedLex {
 			$tabs->add_tab(__('Examples',  $this->pluginID), ob_get_clean()) ; 	
 
 
-			$tabs->add_tab(__('Parameters',  $this->pluginID), $parameters, WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
+			$tabs->add_tab(__('Parameters',  $this->pluginID), $parameters, plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
 			
 			$frmk = new coreSLframework() ;  
 			if (((is_multisite())&&($blog_id == 1))||(!is_multisite())||($frmk->get_param('global_allow_translation_by_blogs'))) {
@@ -440,14 +441,14 @@ class related_articles extends pluginSedLex {
 					$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 					$trans = new translationSL($this->pluginID, $plugin) ; 
 					$trans->enable_translation() ; 
-				$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_trad.png") ; 	
+				$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_trad.png") ; 	
 			}
 
 			ob_start() ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 				$trans = new feedbackSL($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
-			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_mail.png") ; 	
+			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_mail.png") ; 	
 			
 			ob_start() ; 
 				// A list of plugin slug to be excluded
@@ -455,7 +456,7 @@ class related_articles extends pluginSedLex {
 				// Replace sedLex by your own author name
 				$trans = new otherPlugins("sedLex", $exlude) ; 
 				$trans->list_plugins() ; 
-			$tabs->add_tab(__('Other plugins',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_plug.png") ; 	
+			$tabs->add_tab(__('Other plugins',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_plug.png") ; 	
 			
 			echo $tabs->flush() ; 
 			
@@ -510,6 +511,10 @@ class related_articles extends pluginSedLex {
 		} else {
 			$post = get_post($ID) ;  
 		} 
+		
+		if ($post==null) {
+			return array() ; 
+		}
 		
 		//THE CONTENT
 		//=============================
@@ -931,9 +936,11 @@ class related_articles_Widget extends WP_Widget {
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		echo '<h3 class="widget-title">'.$title."</h3>" ; 
 		echo "<p>&nbsp;</p>" ; 
-		$instance_plugin = call_user_func(array('related_articles', 'getInstance'));  ; 
-					
-		echo $instance_plugin->display_related($post->ID);
+		$instance_plugin = call_user_func(array('related_articles', 'getInstance')); 
+		
+		if ($instance_plugin!==false) {
+			echo $instance_plugin->display_related($post->ID);
+		}
 	}
 	
 	// outputs the options form on admin
