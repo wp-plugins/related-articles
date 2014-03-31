@@ -2,8 +2,7 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.6
-
+Version: 1.1.7
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -311,13 +310,14 @@ class related_articles extends pluginSedLex {
 	*/
 	
 	public function configuration_page() {
-		global $wpdb;
+		global $wpdb, $blog_id;
 		?>
-		<div class="wrap">
-			<div id="icon-themes" class="icon32"><br></div>
+		<div class="plugin-titleSL">
 			<h2><?php echo $this->pluginName ?></h2>
 		</div>
-		<div style="padding:20px;">		
+		
+		<div class="plugin-contentSL">		
+			<?php echo $this->signature ; ?>
 
 			<?php
 			//===============================================================================================
@@ -694,7 +694,7 @@ class related_articles extends pluginSedLex {
 			if (($r->extracted_keywords!="")&&($r->signature_param==$this->get_param_signature())) {
 				//On teste que c'est bien un post de la category qu'on veut qu'il est publie 
 				$p = get_post($r->id_post) ;
-				if ($p->post_status=="publish") {
+				if (($p!=null)&&($p->post_status=="publish")) {
 					$list_post = $this->get_param('type_list') ; 
 					$list_post = explode(",",$list_post) ; 
 					foreach($list_post  as $l) {
@@ -815,7 +815,7 @@ class related_articles extends pluginSedLex {
 			if (($r->related_posts!="") && ($r->signature_param==$this->get_param_signature()) && (strtotime($r->date_maj)-strtotime($this->get_param('last_update_posts'))>0)) {
 				//On teste que c'est bien un post de la category qu'on veut qu'il est publie 
 				$p = get_post($r->id_post) ;
-				if ($p->post_status=="publish") {
+				if (($p!=null)&&($p->post_status=="publish")) {
 					$list_post = $this->get_param('type_list') ; 
 					$list_post = explode(",",$list_post) ; 
 					foreach($list_post  as $l) {
@@ -863,38 +863,68 @@ class related_articles extends pluginSedLex {
 			if (has_post_thumbnail($pi)) {
 				$id = get_post_thumbnail_id($pi) ; 
 				$image = wp_get_attachment_image_src($id, "related-articles-thumb");
-				if ($image){
-					list($width, $height) = getimagesize($image[0]);
-					if (($this->get_param("width_thumb") == $width) && ($this->get_param("height_thumb") == $height)){
-						$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
-					} else {
-						// We have to generate the thumbnail
-						$metadata = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
-						wp_update_attachment_metadata( $id, $metadata );
-						$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
-					}
+				$image_path = wp_get_attachment_metadata($id);
+				if (isset($image_path['file'])) {
+					$image_path = $image_path['file'] ; 
 				} else {
-					$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
-				}				
-			} else {
-				$files = get_children("post_parent=$pi&post_type=attachment&post_mime_type=image");
-			  	if($files) {
-					$keys = array_reverse(array_keys($files));
-					$id = $keys[0];
-					$image = wp_get_attachment_image_src($id, "related-articles-thumb");
+					$image_path = "" ; 
+				}
+				$upload_dir = wp_upload_dir() ; 
+				$upload_dir = $upload_dir['basedir'] ; 
+				if (is_file($upload_dir."/".$image_path)) {
 					if ($image){
 						list($width, $height) = getimagesize($image[0]);
 						if (($this->get_param("width_thumb") == $width) && ($this->get_param("height_thumb") == $height)){
-							$cp_fi .=   wp_get_attachment_image($id, "related-articles-thumb");
+							$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
 						} else {
 							// We have to generate the thumbnail
 							$metadata = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
 							wp_update_attachment_metadata( $id, $metadata );
-							$cp_fi .=  wp_get_attachment_image($id, "related-articles-thumb");
+							$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
 						}
 					} else {
-						$cp_fi .=  wp_get_attachment_image($id, "related-articles-thumb");
-					}				
+						$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
+					}	
+				}			
+			} else {
+				$files = get_children("post_parent=$pi&post_type=attachment&post_mime_type=image");
+			  	if($files) {
+					$keys = array_reverse(array_keys($files));
+					$index = -1 ;
+					$upload_dir = "" ; 
+					$image_path = "" ; 
+					do {
+						$index ++ ; 
+						if (!isset($keys[$index])) {
+							break ; 
+						}
+						$id = $keys[$index];
+						$image = wp_get_attachment_image_src($id, "related-articles-thumb");
+							$image_path = wp_get_attachment_metadata($id);
+						if (isset($image_path['file'])) {
+							$image_path = $image_path['file'] ; 
+						} else {
+							$image_path = "" ; 
+						}
+						$upload_dir = wp_upload_dir() ; 
+						$upload_dir = $upload_dir['basedir'] ; 
+					} while(is_file($upload_dir."/".$image_path)) ; 
+					
+					if (is_file($upload_dir."/".$image_path)) {
+						if ($image){
+							list($width, $height) = getimagesize($image[0]);
+							if (($this->get_param("width_thumb") == $width) && ($this->get_param("height_thumb") == $height)){
+								$cp_fi .=   wp_get_attachment_image($id, "related-articles-thumb");
+							} else {
+								// We have to generate the thumbnail
+								$metadata = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
+								wp_update_attachment_metadata( $id, $metadata );
+								$cp_fi .=  wp_get_attachment_image($id, "related-articles-thumb");
+							}
+						} else {
+							$cp_fi .=  wp_get_attachment_image($id, "related-articles-thumb");
+						}	
+					}			
 			  	}
 			}
 			if ($this->get_param('a_thumb')) {

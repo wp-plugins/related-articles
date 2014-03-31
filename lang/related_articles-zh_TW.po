@@ -1,0 +1,133 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-03-14T17:17:36+00:00\n"
+"Last-Translator: chris <http://www.daren.com.tw/>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: Taiwan\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables the display of a number of related posts in each post."
+msgstr "此插件讓一些相關的帖子在每個帖子的顯示"
+
+msgid "Customize the apparence"
+msgstr "自定義apparence"
+
+msgid "HTML:"
+msgstr "HTML"
+
+msgid "Please note that %s stands for a list of related posts. The default value of the HTML is:"
+msgstr "請注意，%s 表示相關的帖子列表。在HTML中，默認值是"
+
+msgid "Please note that %s stands for a list of related posts with their featured images or their first images."
+msgstr "請注意，%s 表示相關的職位，其功能圖像或他們的第一個圖像列表"
+
+msgid "The default value of the HTML is:"
+msgstr "在HTML中的缺省值是"
+
+msgid "Width of the thumbnail image if you choose to display the featured image (see above):"
+msgstr "寬的縮略圖，如果你選擇顯示特色圖片（見上圖）"
+
+msgid "The CSS might have to be modified (see below)."
+msgstr "該CSS可能必須進行修改（見下文）"
+
+msgid "Height of the thumbnail image if you choose to display the featured image (see above):"
+msgstr "縮略圖的高度，如果你選擇顯示特色圖片（見上圖"
+
+msgid "Make the featured images clickable:"
+msgstr "使圖像的特點點擊"
+
+msgid "CSS:"
+msgstr "CSS"
+
+msgid "The default value of the CSS is:"
+msgstr "的CSS的缺省值是"
+
+msgid "The number of related posts to display in each post:"
+msgstr "相關的帖子在每篇文章中顯示的數字"
+
+msgid "The list of type of posts where the related posts are displayed:"
+msgstr "其中顯示了相關的帖子職位類型的列表"
+
+msgid "It is a coma separated list. The default value is:"
+msgstr "這是一個昏迷分隔的列表。默認值是"
+
+msgid "Display in excerpt:"
+msgstr "顯示的摘錄"
+
+msgid "Advanced options"
+msgstr "高級選項"
+
+msgid "Show the score in articles and for the logged users:"
+msgstr "顯示在文章和已登錄用戶的評分"
+
+msgid "What are the different types of posts you want to look for:"
+msgstr "有哪些不同類型的職位你想尋找"
+
+msgid "The number of words used to compare posts:"
+msgstr "用於比較的文章字數"
+
+msgid "The weight of the content:"
+msgstr "的內容物的重量"
+
+msgid "The weight of the title:"
+msgstr "標題的重量"
+
+msgid "The weight of the categories:"
+msgstr "之類的重量"
+
+msgid "The weight of the keywords:"
+msgstr "中的關鍵字的權重"
+
+msgid "For now, your have %s published articles (i.e. %s)."
+msgstr "現在，你擁有了%s 的發表的文章（即%s）"
+
+msgid "%s articles have their keywords cached."
+msgstr "%s的文章有自己的關鍵字緩存"
+
+msgid "%s articles have similar posts cached."
+msgstr "%s的文章有緩存類似的帖子"
+
+msgid "In the following table, you will find some examples of related posts that may be displayed."
+msgstr "在下面的表格，你會發現，可能會顯示相關的職位的一些例子"
+
+msgid "Please note that the presented examples are randomly selected. Refresh the page to change the examples."
+msgstr "請注意，所提出的實施例是隨機選擇的。刷新頁面改變的例子"
+
+msgid "Title of the post"
+msgstr "的帖子標題"
+
+msgid "Extracted words"
+msgstr "提取的詞"
+
+msgid "Related posts"
+msgstr "相關文章"
+
+msgid "Examples"
+msgstr "的例子"
+
+msgid "Parameters"
+msgstr "參數"
+
+msgid "Manage translations"
+msgstr "管理翻譯"
+
+msgid "Give feedback"
+msgstr "提供反饋意見"
+
+msgid "Other plugins"
+msgstr "其他插件"
+

@@ -33,6 +33,7 @@ This plugin works on a multisite installation of Wordpress
 * Italian (Italy) translation provided by cervellomacchiato
 * Russian (Russia) translation provided by 
 * Vietnamese (Viet Nam) translation provided by 
+* Chinese (Taiwan) translation provided by chris
 
 = Features of the framework =
 
@@ -63,6 +64,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.7 = 
+* NEW: Add a logo to improve the look of the plugin
+
 = 1.1.6 = 
 * Various little improvements
 
@@ -92,4 +96,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:1802e951b50dbed684ce8087cea7d8c0
+InfoVersion:53e94aad0022882a42d5753d23c26631
