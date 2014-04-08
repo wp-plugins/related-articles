@@ -2,7 +2,7 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.7
+Version: 1.1.8
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -506,11 +506,7 @@ class related_articles extends pluginSedLex {
 
 	function extract_keywords($ID, $max = 20) {
 		// We retrieve the HTML
-		if (get_post_type($ID)=="page") {
-			$post = get_page($ID) ;  
-		} else {
-			$post = get_post($ID) ;  
-		} 
+		$post = get_post($ID) ;  
 		
 		if ($post==null) {
 			return array() ; 

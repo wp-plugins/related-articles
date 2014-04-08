@@ -64,6 +64,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.1.8 = 
+* Stop using get_page which is depreacated
+
 = 1.1.7 = 
 * NEW: Add a logo to improve the look of the plugin
 
@@ -96,4 +99,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:a027bf92aa63089c47c68a17edc168a7
+InfoVersion:9a5f9a33566980a13be07538629752e7
