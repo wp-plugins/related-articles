@@ -454,7 +454,7 @@ class related_articles extends pluginSedLex {
 			ob_start() ;
 				echo "<p>".__('This plugin only compute a proximity score between each page/post and score the pages/posts with the hightest score.', $this->pluginID)."</p>" ; 
 				echo "<p>".__('The score is based on the title of the post, the content of the post, the category associated with the post and the keywords.', $this->pluginID)."</p>" ; 
-			$howto2 = new SLFramework_Box (__("How to interpret the plagiary image", $this->pluginID), ob_get_clean()) ; 
+			$howto2 = new SLFramework_Box (__("How it works?", $this->pluginID), ob_get_clean()) ; 
 
 			ob_start() ;
 				 echo $howto1->flush() ; 
