@@ -2,7 +2,7 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.1.8
+Version: 1.2.0
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -73,7 +73,7 @@ class related_articles extends pluginSedLex {
 	* 
 	* @return void
 	*/
-	
+		
 	public function _load_widget () {
 		register_widget( 'related_articles_Widget' );
 	}
@@ -199,7 +199,11 @@ class related_articles extends pluginSedLex {
 	*/
 	
 	function _public_css_load() {	
-		$this->add_inline_css($this->get_param('css')) ; 
+		$this->add_inline_css(".related_post_featured_image_img {
+   width:".$this->get_param('width_thumb')."px;
+   height:".$this->get_param('height_thumb')."px;
+}
+".$this->get_param('css')) ; 
 		return ; 
 	}
 	
@@ -262,29 +266,41 @@ class related_articles extends pluginSedLex {
    font-style:normal ; 
    text-align:center ; 
 }
+.related_post_fi_div {
+   position:absolute;
+   bottom:0px ; 
+   background-color:#FFFFFF;
+   opacity:0.7;
+   width:100%;
+}
 .related_post_featured_image {
    border: 1px solid #999999;
    float:left ; 
-   width:120px;
+   width:160px;
    height:160px;
    margin:5px;
-   padding:5px;
+   padding:0px;
    overflow:hidden;
+   position:relative;
 }
 .related_post_featured_image_img {
-   width:116px;
-   height:116px;
-   margin:2px;
+   margin:0px;
    padding:0px;
-}"		; break ; 
+}
+.related_post_featured_image_img:hover {
+    opacity: 0.8;
+}
+"		; break ; 
 			case 'html' 		: return "*<div class='related_posts'>
 <p class='related_posts_title'>You may also like ...</p>
      %related_posts_with_featured_image%
 </div>"			; break ; 
 			
-			case 'width_thumb' 		: return 116				; break ; 
-			case 'height_thumb' 		: return 116				; break ; 
+			case 'width_thumb' 		: return 160				; break ; 
+			case 'height_thumb' 		: return 160				; break ; 
 			case 'a_thumb' 		: return false				; break ; 
+
+			case 'default_image' 		: return "[media]"				; break ; 
 
 			case 'ponderation_content' 		: return 1				; break ; 
 			case 'ponderation_title' 		: return 1				; break ; 
@@ -322,42 +338,46 @@ class related_articles extends pluginSedLex {
 			<?php
 			//===============================================================================================
 			// After this comment, you may modify whatever you want
-			?>
-			<p><?php echo __("This plugin enables the display of a number of related posts in each post.", $this->pluginID) ;?></p>
-			<?php
 			
 			// We check rights
 			$this->check_folder_rights( array(array(WP_CONTENT_DIR."/sedlex/test/", "rwx")) ) ;
 			
-			$tabs = new adminTabs() ; 
+			$tabs = new SLFramework_Tabs() ; 
 			
 			ob_start() ; 
-				$params = new parametersSedLex($this) ; 
-				$params->add_title(__("Customize the apparence", $this->pluginID)) ; 
-				$params->add_param('html', __("HTML:", $this->pluginID)) ; 
-				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts. The default value of the HTML is:", $this->pluginID), "<code>%related_posts%</code>")) ; 
-				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts with their featured images or their first images.", $this->pluginID), "<code>%related_posts_with_featured_image%</code>")) ; 
-				$params->add_comment(__("The default value of the HTML is:", $this->pluginID)) ; 
-				$params->add_comment_default_value('html') ; 
-				$params->add_param('width_thumb', __("Width of the thumbnail image if you choose to display the featured image (see above):", $this->pluginID)) ; 
-				$params->add_comment(__("The CSS might have to be modified (see below).", $this->pluginID)) ; 
-				$params->add_param('height_thumb', __("Height of the thumbnail image if you choose to display the featured image (see above):", $this->pluginID)) ; 
-				$params->add_comment(__("The CSS might have to be modified (see below).", $this->pluginID)) ; 
-				$params->add_param('a_thumb', __("Make the featured images clickable:", $this->pluginID)) ; 
-				$params->add_param('css', __("CSS:", $this->pluginID)) ; 
-				$params->add_comment(__("The default value of the CSS is:", $this->pluginID)) ; 
-				$params->add_comment_default_value('css') ; 
+				$params = new SLFramework_Parameters($this) ; 
+
+
+				$params->add_title(__("General appearance options", $this->pluginID)) ; 
 				$params->add_param('nb_similar_posts', __("The number of related posts to display in each post:", $this->pluginID)) ; 
 				$params->add_param('display_in', __("The list of type of posts where the related posts are displayed:", $this->pluginID)) ; 
 				$params->add_comment(__("It is a coma separated list. The default value is:", $this->pluginID)) ; 
 				$params->add_comment_default_value('display_in') ; 
 				$params->add_param('display_in_excerpt', __("Display in excerpt:", $this->pluginID)) ; 
 				
+				$params->add_title(__("Advanced appearance options", $this->pluginID)) ; 
+				$params->add_param('html', __("HTML:", $this->pluginID)) ; 
+				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts. The default value of the HTML is:", $this->pluginID), "<code>%related_posts%</code>")) ; 
+				$params->add_comment(sprintf(__("Please note that %s stands for a list of related posts with their featured images or their first images.", $this->pluginID), "<code>%related_posts_with_featured_image%</code>")) ; 
+				$params->add_comment(__("The default value of the HTML is:", $this->pluginID)) ; 
+				$params->add_comment_default_value('html') ; 
+				$params->add_param('width_thumb', __("Width of the thumbnail image if you choose to display the featured image (see above):", $this->pluginID)) ; 
+				$params->add_comment(__("The CSS will be modified.", $this->pluginID)) ; 
+				$params->add_param('height_thumb', __("Height of the thumbnail image if you choose to display the featured image (see above):", $this->pluginID)) ; 
+				$params->add_comment(__("The CSS will be modified.", $this->pluginID)) ; 
+				$params->add_param('a_thumb', __("Make the featured images clickable:", $this->pluginID)) ; 
+				$params->add_param('css', __("CSS:", $this->pluginID)) ; 
+				$params->add_comment(__("The default value of the CSS is:", $this->pluginID)) ; 
+				$params->add_comment_default_value('css') ; 
+				$params->add_param('default_image', __("Choose the default image to be displayed when no image is found:", $this->pluginID)) ; 
+				
 				$params->add_title(__("Advanced options", $this->pluginID)) ; 
 				$params->add_param('show_number', __("Show the score in articles and for the logged users:", $this->pluginID)) ; 
 				$params->add_param('type_list', __("What are the different types of posts you want to look for:", $this->pluginID)) ; 
 				$params->add_comment(__("It is a coma separated list. The default value is:", $this->pluginID)) ; 
 				$params->add_comment_default_value('type_list') ; 
+				
+				$params->add_title(__("Computation of the proximity score", $this->pluginID)) ; 
 				$params->add_param('nb_keywords', __("The number of words used to compare posts:", $this->pluginID)) ; 
 				$params->add_param('ponderation_content', __("The weight of the content:", $this->pluginID)) ; 
 				$params->add_param('ponderation_title', __("The weight of the title:", $this->pluginID)) ; 
@@ -392,7 +412,7 @@ class related_articles extends pluginSedLex {
 				echo "<p>".__("In the following table, you will find some examples of related posts that may be displayed.", $this->pluginID)."</p>" ; 
 				echo "<p>".__("Please note that the presented examples are randomly selected. Refresh the page to change the examples.", $this->pluginID)."</p>" ; 
 				
-				$table = new adminTable() ; 
+				$table = new SLFramework_Table() ; 
 				$table->title(array(__("Title of the post", $this->pluginID), __("Extracted words", $this->pluginID), __("Related posts", $this->pluginID))) ; 
 				
 				$nb_max = 1 ; 
@@ -401,18 +421,14 @@ class related_articles extends pluginSedLex {
 				$args = array( 'numberposts' => $nb_max , 'orderby' => 'rand' );
 				$rand_posts = get_posts( $args );
 				foreach( $rand_posts as $p ) {
-					// DEBUG
-					//$id=54 ; 
-					//$p = get_post($id) ; 
 					
 					$cel1 = new adminCell("<strong><a href='".get_permalink($p->ID)."'>".$p->post_title."</a></strong>") ; 		
 					ob_start() ; 
 						$keywords = $this->extract_keywords_fromcache($p->ID, $this->get_param('nb_keywords')) ; 
 						foreach ($keywords as $k=>$n) {
-							echo "<p><span style='display:block;position:relative;margin:0;padding:0;width:".floor(100*$multiple)."px;height:20px;background-color:#FEFEFE;border:1px #AAAAAA solid;'>" ; 
-							echo "<span style='display:block;position:absolute;margin:0;padding:0;width:".floor($n*$multiple)."px;height:20px;background-color:#FBB917;'></span>" ; 
-							echo "<span style='display:block;position:absolute;left:10px;margin:0;padding:0;width:100%;height:20px;'>$k</span>" ; 
-							echo "</span></p>" ; 
+							$progress_status = new SLFramework_Progressbar (300, 20, floor($n), $k." ($n %)") ; 
+							$progress_status->flush() ; 
+							echo "<br>" ; 
 						}
 					$cel2 = new adminCell(ob_get_clean()) ; 	
 					
@@ -431,7 +447,19 @@ class related_articles extends pluginSedLex {
 				echo $table->flush() ; 
 				
 			$tabs->add_tab(__('Examples',  $this->pluginID), ob_get_clean()) ; 	
+			// HOW To
+			ob_start() ;
+				echo "<p>".__("This plugin enables the display of a number of related posts in each post.", $this->pluginID)."</p>" ; 
+			$howto1 = new SLFramework_Box (__("Purpose of that plugin", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".__('This plugin only compute a proximity score between each page/post and score the pages/posts with the hightest score.', $this->pluginID)."</p>" ; 
+				echo "<p>".__('The score is based on the title of the post, the content of the post, the category associated with the post and the keywords.', $this->pluginID)."</p>" ; 
+			$howto2 = new SLFramework_Box (__("How to interpret the plagiary image", $this->pluginID), ob_get_clean()) ; 
 
+			ob_start() ;
+				 echo $howto1->flush() ; 
+				 echo $howto2->flush() ; 
+			$tabs->add_tab(__('How To',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_how.png") ; 				
 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), $parameters, plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
 			
@@ -439,14 +467,14 @@ class related_articles extends pluginSedLex {
 			if (((is_multisite())&&($blog_id == 1))||(!is_multisite())||($frmk->get_param('global_allow_translation_by_blogs'))) {
 				ob_start() ; 
 					$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-					$trans = new translationSL($this->pluginID, $plugin) ; 
+					$trans = new SLFramework_Translation($this->pluginID, $plugin) ; 
 					$trans->enable_translation() ; 
 				$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_trad.png") ; 	
 			}
 
 			ob_start() ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-				$trans = new feedbackSL($plugin, $this->pluginID) ; 
+				$trans = new SLFramework_Feedback($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
 			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_mail.png") ; 	
 			
@@ -454,7 +482,7 @@ class related_articles extends pluginSedLex {
 				// A list of plugin slug to be excluded
 				$exlude = array('wp-pirate-search') ; 
 				// Replace sedLex by your own author name
-				$trans = new otherPlugins("sedLex", $exlude) ; 
+				$trans = new SLFramework_OtherPlugins("sedLex", $exlude) ; 
 				$trans->list_plugins() ; 
 			$tabs->add_tab(__('Other plugins',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_plug.png") ; 	
 			
@@ -475,7 +503,7 @@ class related_articles extends pluginSedLex {
 	*/
 	
 	function get_param_signature() {
-		return md5($this->get_param('nb_similar_posts').$this->get_param('nb_keywords').$this->get_param('ponderation_content').$this->get_param('ponderation_title').$this->get_param('ponderation_category').$this->get_param('ponderation_keywords')) ; 
+		return sha1($this->get_param('nb_similar_posts').$this->get_param('nb_keywords').$this->get_param('ponderation_content').$this->get_param('ponderation_title').$this->get_param('ponderation_category').$this->get_param('ponderation_keywords')) ; 
 	}
 	
 	/** ====================================================================================================================================================
@@ -665,10 +693,10 @@ class related_articles extends pluginSedLex {
 			//We check if there is already an entry
 			$query = "SELECT id_post FROM ".$this->table_name." WHERE id_post='$ID'"  ; 
 			if ($ID==$wpdb->get_var($query)) {
-				$query = "UPDATE ".$this->table_name." SET extracted_keywords='".mysql_real_escape_string(serialize($keywords))."', signature_param='".$this->get_param_signature()."' WHERE id_post='$ID'"  ; 
+				$query = "UPDATE ".$this->table_name." SET extracted_keywords='".addslashes(serialize($keywords))."', signature_param='".$this->get_param_signature()."' WHERE id_post='$ID'"  ; 
 				$wpdb->query($query) ; 
 			} else {
-				$query = "INSERT INTO ".$this->table_name." (id_post, extracted_keywords, signature_param) VALUES ('$ID', '".mysql_real_escape_string(serialize($keywords))."', '".$this->get_param_signature()."') "  ; 
+				$query = "INSERT INTO ".$this->table_name." (id_post, extracted_keywords, signature_param) VALUES ('$ID', '".addslashes(serialize($keywords))."', '".$this->get_param_signature()."') "  ; 
 				$wpdb->query($query) ; 
 			}
 			return $keywords ; 
@@ -785,10 +813,10 @@ class related_articles extends pluginSedLex {
 		//We check if there is already an entry
 		$query = "SELECT id_post FROM ".$this->table_name." WHERE id_post='$ID'"  ; 
 		if ($ID==$wpdb->get_var($query)) {
-			$query = "UPDATE ".$this->table_name." SET related_posts='".mysql_real_escape_string(serialize($related_posts))."', date_maj='".date("Y-m-d H:i:s")."', signature_param='".$this->get_param_signature()."' WHERE id_post='$ID'"  ; 
+			$query = "UPDATE ".$this->table_name." SET related_posts='".esc_attr(serialize($related_posts))."', date_maj='".date("Y-m-d H:i:s")."', signature_param='".$this->get_param_signature()."' WHERE id_post='$ID'"  ; 
 			$wpdb->query($query) ; 
 		} else {
-			$query = "INSERT INTO ".$this->table_name." (id_post, related_posts, signature_param,date_maj) VALUES ('$ID', '".mysql_real_escape_string(serialize($keywords))."', '".$this->get_param_signature()."','".date("Y-m-d H:i:s")."')"  ; 
+			$query = "INSERT INTO ".$this->table_name." (id_post, related_posts, signature_param,date_maj) VALUES ('$ID', '".esc_attr(serialize($keywords))."', '".$this->get_param_signature()."','".date("Y-m-d H:i:s")."')"  ; 
 			$wpdb->query($query) ; 
 		}
 		return $related_posts ; 
@@ -832,6 +860,7 @@ class related_articles extends pluginSedLex {
 	*/
 	
 	function display_related($id) {
+		global $wpdb ; 
 		$content = $this->get_param('html') ; 
 		
 		$related_posts = $this->similar_posts_fromcache($id, $this->get_param('nb_similar_posts')) ; 
@@ -921,18 +950,28 @@ class related_articles extends pluginSedLex {
 							$cp_fi .=  wp_get_attachment_image($id, "related-articles-thumb");
 						}	
 					}			
+			  	} else {
+			  		// get the URL of the default image
+					$attachment_url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '',  $this->get_param('default_image'));
+					$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';",$attachment_url)); 
+					if (isset($attachment[0])) {
+						$id_media =  $attachment[0]; 
+						if (wp_attachment_is_image( $id_media )) {
+							$cp_fi .=  wp_get_attachment_image($id_media, "related-articles-thumb");
+						} 
+ 					} 
 			  	}
 			}
 			if ($this->get_param('a_thumb')) {
 				$cp_fi .= "</a>" ; 
  			}
 			$cp_fi .= "</div>" ; 			
-			$cp_fi .= "<p class='related_post_fi'>" ; 
-			$cp_fi .= "<a href='".get_permalink($pi)."'>".get_the_title($pi)."</a>" ; 
+			$cp_fi .= "<div class='related_post_fi_div'><p class='related_post_fi'>" ; 
+			$cp_fi .= "<a href='".get_permalink($pi)."'>".trim(get_the_title($pi))."</a>" ; 
 			if ((is_user_logged_in())&&($this->get_param('show_number'))) {
 				$cp_fi .= " ($n)" ; 
 			} 
-			$cp_fi .= "</p>" ; 
+			$cp_fi .= "</p></div>" ; 
 			$cp_fi .= "</div>" ; 
 		}
 		$cp_fi .= "<div style='clear:both;'></div>" ;

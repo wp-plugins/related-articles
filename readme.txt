@@ -64,6 +64,11 @@ Have fun !
 
 == Changelog ==
 
+= 1.2.0 = 
+* NEW: How to
+* NEW: improve the default appeareance of the thumbnails
+* NEW: add a default image if no image is available...
+
 = 1.1.8 = 
 * Stop using get_page which is depreacated
 
@@ -99,4 +104,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:9a5f9a33566980a13be07538629752e7
+InfoVersion:919a2ba19dd85f981a865558602b37b5085a44f5
