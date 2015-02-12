@@ -2,7 +2,7 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.2.0
+Version: 1.2.1
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -106,6 +106,20 @@ class related_articles extends pluginSedLex {
 			switch_to_blog($old_blog);
 		} else {
 			$wpdb->query("DROP TABLE ".$wpdb->prefix . "pluginSL_" . 'related_articles' ) ; 
+		}
+		
+		// DELETE FILES if needed
+		//SLFramework_Utils::rm_rec(WP_CONTENT_DIR."/sedlex/my_plugin/"); 
+		$plugins_all = 	get_plugins() ; 
+		$nb_SL = 0 ; 	
+		foreach($plugins_all as $url => $pa) {
+			$info = pluginSedlex::get_plugins_data(WP_PLUGIN_DIR."/".$url);
+			if ($info['Framework_Email']=="sedlex@sedlex.fr"){
+				$nb_SL++ ; 
+			}
+		}
+		if ($nb_SL==1) {
+			SLFramework_Utils::rm_rec(WP_CONTENT_DIR."/sedlex/"); 
 		}
 	}
 
