@@ -2,7 +2,8 @@
 /**
 Plugin Name: Related Articles
 Description: <p>Returns a list of related entries to display into your posts/pages/etc.</p><p>You may configure the apparence, the weights, etc.</p><p>It is also possible to display featured images or first images in articles. </p><p>This plugin is under GPL licence</p>
-Version: 1.2.1
+Version: 1.2.2
+
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -912,7 +913,7 @@ class related_articles extends pluginSedLex {
 				$upload_dir = $upload_dir['basedir'] ; 
 				if (is_file($upload_dir."/".$image_path)) {
 					if ($image){
-						list($width, $height) = getimagesize($image[0]);
+						list($width, $height) = getimagesize(str_replace(' ',"%20", $image[0]));
 						if (($this->get_param("width_thumb") == $width) && ($this->get_param("height_thumb") == $height)){
 							$cp_fi .=  get_the_post_thumbnail( $pi, "related-articles-thumb") ; 
 						} else {
@@ -951,7 +952,7 @@ class related_articles extends pluginSedLex {
 					
 					if (is_file($upload_dir."/".$image_path)) {
 						if ($image){
-							list($width, $height) = getimagesize($image[0]);
+							list($width, $height) = getimagesize(str_replace(' ',"%20", $image[0]));
 							if (($this->get_param("width_thumb") == $width) && ($this->get_param("height_thumb") == $height)){
 								$cp_fi .=   wp_get_attachment_image($id, "related-articles-thumb");
 							} else {

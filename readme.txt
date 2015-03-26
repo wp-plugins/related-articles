@@ -60,6 +60,10 @@ Have fun !
 
 == Changelog ==
 
+= 1.2.2 = 
+* BUG: Problem with blank characters in URL 
+* UPDATE of the framework for handling a plurality of tables SQL
+
 = 1.2.1 = 
 * NEW: Icons
 * NEW: Delete content on desinstall
@@ -104,4 +108,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:3d0c41fb246b5d6da532f29fac16723665025f8b
+InfoVersion:92d45d3c35a7d98eb776f594f65eb11fd5735700
